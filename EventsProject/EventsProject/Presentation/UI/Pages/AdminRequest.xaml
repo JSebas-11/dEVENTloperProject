@@ -1,0 +1,135 @@
+﻿<Page x:Class="EventsProject.Presentation.UI.Pages.AdminRequest"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:EventsProject.Presentation.UI.Pages"
+      xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+      xmlns:fa="http://schemas.fontawesome.io/icons/"
+      xmlns:compts="clr-namespace:EventsProject.Presentation.Components"
+      
+      mc:Ignorable="d" 
+      Title="AdminRequest">
+    
+    <!-- MAIN LAYOUT -->
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height=".05*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width=".25*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width=".5*"/>
+        </Grid.ColumnDefinitions>
+
+         <!-- MAIN LAYOUT - HEADER -->
+        <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
+            <fa:FontAwesome Icon="HourglassHalf" Margin="0 0 10 0" Style="{StaticResource fnaAnimatedFade}"/>
+            <Label Content="Requested Events" Style="{StaticResource fntTitle}" 
+               Foreground="{StaticResource clrTxt}" VerticalAlignment="Center"/>
+        </StackPanel>
+
+        <fa:FontAwesome Grid.Row="0" Grid.Column="2" Icon="FlagCheckered" Style="{StaticResource fnaAnimatedFade}"/>
+        
+        <!-- MAIN LAYOUT - HEADER SECTION -->
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- MAIN LAYOUT - HEADER SECTION - INFO -->
+            <StackPanel Grid.Row="0" Grid.Column="0">
+                <Label Content="Events requested by users, you can approve or reject each one" 
+                       Style="{StaticResource fntSbTitle}" Foreground="{StaticResource clrTxtSec}"/>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Label Content="Pending Events for Approval:" Style="{StaticResource fntSbTitle}" Foreground="{StaticResource clrTxtSec}"/>
+                    <Label x:Name="lblPendingEvents" Style="{StaticResource fntSbTitle}" Foreground="{StaticResource clrTxt}"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
+                    <Button x:Name="btnRefresh" Click="btnRefresh_Click" Margin="0 0 5 0">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:FontAwesome Icon="RotateRight" Style="{StaticResource fnaAnimatedBtn}"/>
+                            <TextBlock Text="Refresh" Margin="8 0 0 0"/>
+                        </StackPanel>
+                    </Button>
+                    <Button x:Name="btnSaveChanges" Click="btnSaveChanges_Click" Margin="5 0 0 0">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:FontAwesome Icon="Save" Style="{StaticResource fnaAnimatedBtn}"/>
+                            <TextBlock Text="Save Changes" Margin="8 0 0 0"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            
+            </StackPanel>
+                
+            <!-- MAIN LAYOUT - HEADER SECTION - EVENT LISTS -->
+            <Grid Grid.Row="0" Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Orientation="Horizontal" Grid.Row="0">
+                    <Label Content="Approved Events" Style="{StaticResource fntText}"/>
+                    <Label x:Name="lblApprovedCount" Style="{StaticResource fntTitle}"/>
+                </StackPanel>
+
+                <DataGrid x:Name="dgApprovedEvents" Grid.Row="1" IsReadOnly="True" Style="{StaticResource styleDgCustomized}"
+                          RowStyle="{StaticResource styleDgRCustomized}" ColumnHeaderStyle="{StaticResource styleDghCustomized}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Event ID" Binding="{Binding EventId}"/>
+                        <DataGridTextColumn Header="Title" Binding="{Binding Title}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+
+            <Grid Grid.Row="0" Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Rejected Events" Style="{StaticResource fntText}"/>
+                    <Label x:Name="lblRejectedCount" Style="{StaticResource fntTitle}"/>
+                </StackPanel>
+
+                <DataGrid x:Name="dgRejectedEvents" Grid.Row="1" IsReadOnly="True" Style="{StaticResource styleDgCustomized}"
+                          RowStyle="{StaticResource styleDgRCustomized}" ColumnHeaderStyle="{StaticResource styleDghCustomized}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Event ID" Binding="{Binding EventId}"/>
+                        <DataGridTextColumn Header="Title" Binding="{Binding Title}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+
+        </Grid>
+        
+        <!-- MAIN LAYOUT - DATA SECTION -->
+        <ScrollViewer Grid.Row="2" Grid.Column="1" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Disabled" CanContentScroll="False"
+                      Padding="8" Background="{StaticResource clrHover}" Margin="0 5 0 0">
+            <ItemsControl x:Name="icRequestedEvents">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal" IsItemsHost="True" HorizontalAlignment="Center"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <compts:EventAprobation Event="{Binding}" ApproveClicked="EventAprobation_ApproveClicked" DenyClicked="EventAprobation_DenyClicked"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+
+    </Grid>
+    
+</Page>

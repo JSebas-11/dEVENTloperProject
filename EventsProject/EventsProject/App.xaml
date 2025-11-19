@@ -1,0 +1,363 @@
+﻿<Application x:Class="EventsProject.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:sys="clr-namespace:System;assembly=System.Runtime"
+             xmlns:local="clr-namespace:EventsProject"
+             xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:fa="http://schemas.fontawesome.io/icons/"
+             
+             ShutdownMode="OnMainWindowClose">
+    
+    <Application.Resources>
+        
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!--METRO CONFIGURATION-->
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Dark.Blue.xaml" />
+
+                <!--TOAST NOTIFICATIONS CONFIGURATION-->
+                <ResourceDictionary Source="pack://application:,,,/ToastNotifications.Messages;component/Themes/Default.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <!--GLOBAL CONFIGURATION-->
+            <!--GLOBAL CONFIGURATION - SIZES -->
+            <sys:Double x:Key="screenWidth">1280</sys:Double>
+            <sys:Double x:Key="screenHeight">720</sys:Double>
+            <sys:Double x:Key="formWidth">700</sys:Double>
+            <sys:Double x:Key="formHeight">650</sys:Double>
+
+            <!--GLOBAL CONFIGURATION - COLORS -->
+            <SolidColorBrush x:Key="clrMain" Color="#023F81"/>
+            <SolidColorBrush x:Key="clrSec" Color="#21487A"/>
+            <SolidColorBrush x:Key="clrHover" Color="#37518A"/>
+            <SolidColorBrush x:Key="clrBlack" Color="#222"/>
+            <SolidColorBrush x:Key="clrTxt" Color="#FEE"/>
+            <SolidColorBrush x:Key="clrTxtSec" Color="#AAA"/>
+            <SolidColorBrush x:Key="clrTrans" Color="Transparent"/>
+
+            <LinearGradientBrush x:Key="linerGradBG" StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="{Binding Color, Source={StaticResource clrMain}}" Offset="0.2" />
+                <GradientStop Color="{Binding Color, Source={StaticResource clrBlack}}" Offset="0.7" />
+            </LinearGradientBrush>
+
+            <!--GLOBAL CONFIGURATION - FONTS -->
+            <Style x:Key="fntTitle" TargetType="Control">
+                <Setter Property="FontFamily" Value="Segoe UI"/>
+                <Setter Property="FontSize" Value="28"/>
+                <Setter Property="FontWeight" Value="ExtraBold"/>
+            </Style>
+            <Style x:Key="fntSbTitle" TargetType="Control">
+                <Setter Property="FontFamily" Value="Segoe UI"/>
+                <Setter Property="FontSize" Value="22"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+            </Style>
+            <Style x:Key="fntText" TargetType="Control">
+                <Setter Property="FontFamily" Value="Segoe UI"/>
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="FontWeight" Value="Normal"/>
+            </Style>
+            <Style x:Key="fntTitleTxb" TargetType="TextBlock">
+                <Setter Property="FontFamily" Value="Segoe UI"/>
+                <Setter Property="FontSize" Value="28"/>
+                <Setter Property="FontWeight" Value="ExtraBold"/>
+            </Style>
+            <Style x:Key="fntSbTitleTxb" TargetType="TextBlock">
+                <Setter Property="FontFamily" Value="Segoe UI"/>
+                <Setter Property="FontSize" Value="22"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+            </Style>
+            <Style x:Key="fntTextTxb" TargetType="TextBlock">
+                <Setter Property="FontFamily" Value="Segoe UI"/>
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="FontWeight" Value="Normal"/>
+            </Style>
+            
+            <!--GLOBAL CONFIGURATION - INPUTS TEXBOX -->
+            <Style x:Key="styTextBox" TargetType="Control">
+                <Setter Property="Background" Value="{StaticResource clrMain}"/>
+                <Setter Property="BorderBrush" Value="{StaticResource clrTxtSec}"/>
+                <Setter Property="BorderThickness" Value="2"/>
+                <Setter Property="FontFamily" Value="Segoe UI"/>
+                <Setter Property="FontSize" Value="22"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+                <Setter Property="Foreground" Value="{StaticResource clrTxtSec}"/>
+                <Setter Property="Padding" Value="5"/>
+
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Foreground" Value="{StaticResource clrTxt}"/>
+                    </Trigger>
+                    <Trigger Property="IsFocused" Value="True">
+                        <Setter Property="Foreground" Value="{StaticResource clrTxt}"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+            <!--GLOBAL CONFIGURATION - INPUTS TIME -->
+            <Style TargetType="mah:TimePicker">
+                <Setter Property="Background" Value="{StaticResource clrHover}"/>
+            </Style>
+            
+            <!--GLOBAL CONFIGURATION - DATAGRID -->
+            <Style x:Key="styleDgCustomized" TargetType="DataGrid">
+                <Setter Property="AlternatingRowBackground" Value="{StaticResource clrMain}"/>
+                <Setter Property="Background" Value="{StaticResource clrMain}"/>
+                <Setter Property="BorderBrush" Value="{StaticResource clrTxt}"/>
+                <Setter Property="BorderThickness" Value="2"/>
+                <Setter Property="Foreground" Value="{StaticResource clrTxt}"/>
+                <Setter Property="FontFamily" Value="Segoe UI"/>
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="FontWeight" Value="Normal"/>
+                <Setter Property="CanUserAddRows" Value="False"/>
+                <Setter Property="AutoGenerateColumns" Value="False"/>
+            </Style>
+
+            <!--GLOBAL CONFIGURATION - DATAGRIDHEADER -->
+            <Style x:Key="styleDghCustomized" TargetType="DataGridColumnHeader">
+                <Setter Property="Background" Value="{StaticResource clrMain}"/>
+                <Setter Property="Cursor" Value="ScrollNS"/>
+                <Setter Property="Foreground" Value="{StaticResource clrTxt}"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                <Setter Property="Padding" Value="5"/>
+                <Setter Property="BorderBrush" Value="{StaticResource clrTxtSec}"/>
+                <Setter Property="BorderThickness" Value="2"/>
+            </Style>
+
+            <!--GLOBAL CONFIGURATION - DATAGRIDROW -->
+            <Style x:Key="styleDgRCustomized" TargetType="DataGridRow">
+                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Cursor" Value="IBeam"/>
+            </Style>
+
+            <!--GLOBAL CONFIGURATION - EXPANDER -->
+            <Style TargetType="Expander"> </Style>
+            
+            <!--GLOBAL CONFIGURATION - HAMBURGERMENU -->
+            <Style TargetType="mah:HamburgerMenu">
+                <Setter Property="CompactPaneLength" Value="50"/>
+                <Setter Property="DisplayMode" Value="CompactOverlay"/>
+                <Setter Property="OpenPaneLength" Value="200"/>
+                <Setter Property="PaneBackground" Value="{StaticResource linerGradBG}"/>
+                <Setter Property="Panel.ZIndex" Value="10"/>
+                <Setter Property="PanePlacement" Value="Left"/>
+                <Setter Property="SelectedIndex" Value="0"/>
+
+                <Style.Triggers>
+                    <Trigger Property="IsPaneOpen" Value="True">
+                        <Setter Property="Opacity" Value=".85"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+            <!--GLOBAL CONFIGURATION - BUTTONS -->
+            <Style TargetType="Button">
+                <Setter Property="Background" Value="{StaticResource clrMain}"/>
+                <Setter Property="BorderBrush" Value="{StaticResource clrTxtSec}"/>
+                <Setter Property="FontFamily" Value="Segoe UI"/>
+                <Setter Property="FontSize" Value="22"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+                <Setter Property="Foreground" Value="{StaticResource clrTxtSec}"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" 
+                                    BorderThickness="3" CornerRadius="5" Padding="6">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="{StaticResource clrHover}"/>
+                                    <Setter Property="BorderBrush" Value="{StaticResource clrMain}"/>
+                                    <Setter Property="Foreground" Value="{StaticResource clrMain}"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="btnLink" TargetType="Button">
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="BorderBrush" Value="Transparent"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="Foreground" Value="{StaticResource clrTxtSec}"/>
+                <Setter Property="FontWeight" Value="Normal"/>
+                <Setter Property="Padding" Value="0"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <TextBlock TextDecorations="Underline" Text="{TemplateBinding Content}" Style="{StaticResource fntTextTxb}"
+                                       Foreground="{TemplateBinding Foreground}" Cursor="{TemplateBinding Cursor}" />
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Foreground" Value="{StaticResource clrTxt}" />
+                    </Trigger>    
+                </Style.Triggers>
+            </Style>
+
+            <!--GLOBAL CONFIGURATION - BORDER -->
+            <Style x:Key="brdCard" TargetType="Border">
+                <Setter Property="Background" Value="{StaticResource clrHover}"/>
+                <Setter Property="BorderBrush" Value="{StaticResource clrTxtSec}"/>
+                <Setter Property="BorderThickness" Value="5"/>
+                <Setter Property="CornerRadius" Value="10"/>
+                <Setter Property="Padding" Value="10"/>
+                <Setter Property="Margin" Value="10"/>
+
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="{StaticResource clrMain}"/>
+                        <Setter Property="BorderBrush" Value="{StaticResource clrTxt}"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+            <!--GLOBAL CONFIGURATION - BORDER LABEL -->
+            <Style x:Key="lblBrdCard" TargetType="Label">
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="FontFamily" Value="Segoe UI"/>
+                <Setter Property="FontSize" Value="20"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+                <Setter Property="Foreground" Value="{StaticResource clrTxtSec}"/>
+
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType=Border}}" Value="True">
+                        <Setter Property="Foreground" Value="{StaticResource clrTxt}"/>
+                        <Setter Property="FontSize" Value="25"/>
+                    </DataTrigger>
+
+                </Style.Triggers>
+            </Style>
+
+            <!--GLOBAL CONFIGURATION - JumpSimulation -->
+            <BounceEase x:Key="jumpEase" Bounces="1" Bounciness="2" EasingMode="EaseIn"/>
+
+            <!--GLOBAL CONFIGURATION - BORDER ICON -->
+            <Style x:Key="fnaBrdCard" TargetType="fa:FontAwesome">
+                <Setter Property="FontSize" Value="30"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Margin" Value="0 0 10 0"/>
+                <Setter Property="Foreground" Value="{StaticResource clrTxtSec}"/>
+                <Setter Property="RenderTransform">
+                    <Setter.Value> <TranslateTransform/> </Setter.Value>
+                </Setter>
+
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType=Border}}" Value="True">
+                        <Setter Property="Foreground" Value="{StaticResource clrTxt}"/>            
+                        <DataTrigger.EnterActions>
+                            <BeginStoryboard x:Name="jumpStoryboard">
+                                <Storyboard AutoReverse="True" RepeatBehavior="Forever">
+                                    <DoubleAnimation Storyboard.TargetProperty="RenderTransform.(TranslateTransform.Y)" 
+                                                     From="10" To="-10" Duration="0:0:1" EasingFunction="{StaticResource jumpEase}"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </DataTrigger.EnterActions>
+                        <DataTrigger.ExitActions>
+                            <StopStoryboard BeginStoryboardName="jumpStoryboard"/>
+                        </DataTrigger.ExitActions>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+            
+            <!--GLOBAL CONFIGURATION - ICONS -->
+            <Style TargetType="fa:FontAwesome">
+                <Setter Property="FontSize" Value="40"/>
+                <Setter Property="Foreground" Value="{StaticResource clrTxtSec}"/>
+            </Style>
+            
+            <!--GLOBAL CONFIGURATION - ICONS ANIMATED -->
+            <Style x:Key="fnaAnimatedBtn" TargetType="fa:FontAwesome">
+                <Setter Property="FontSize" Value="30"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Foreground" Value="{StaticResource clrTxtSec}"/>
+                <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <RotateTransform Angle="0"/>
+                    </Setter.Value>
+                </Setter>
+
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType=Button}}" Value="True">
+                        <Setter Property="Foreground" Value="{StaticResource clrMain}"/>
+                        <DataTrigger.EnterActions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetProperty="RenderTransform.(RotateTransform.Angle)"
+                                                     To="360" Duration="0:0:.5" RepeatBehavior="1x"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </DataTrigger.EnterActions>
+                        
+                        <DataTrigger.ExitActions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetProperty="RenderTransform.(RotateTransform.Angle)"
+                                         To="0" Duration="0:0:0.3"
+                                         AccelerationRatio="0.3" DecelerationRatio="0.7"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </DataTrigger.ExitActions>
+                    </DataTrigger>
+                    
+                </Style.Triggers>
+            </Style>
+
+            <Style x:Key="fnaAnimatedFade" TargetType="fa:FontAwesome">
+                <Setter Property="FontSize" Value="40"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Foreground" Value="{StaticResource clrTxt}"/>
+
+                <Style.Triggers>
+                    <EventTrigger RoutedEvent="Loaded">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="Opacity" From=".2" To="1" Duration="0:0:1"
+                                                 AutoReverse="True" RepeatBehavior="Forever"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Style.Triggers>
+            </Style>
+
+            <Style x:Key="fnaAnimatedJump" TargetType="fa:FontAwesome">
+                <Setter Property="FontSize" Value="40"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Foreground" Value="{StaticResource clrTxtSec}"/>
+                <Setter Property="RenderTransform">
+                    <Setter.Value> <TranslateTransform/> </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <EventTrigger RoutedEvent="Loaded">
+                        <BeginStoryboard>
+                            <Storyboard AutoReverse="True" RepeatBehavior="Forever">
+                                <DoubleAnimation Storyboard.TargetProperty="Opacity" From=".2" To="1" Duration="0:0:1"/>
+                                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.(TranslateTransform.Y)" 
+                                                 From="10" To="-10" Duration="0:0:1" EasingFunction="{StaticResource jumpEase}"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Style.Triggers>
+            </Style>
+            
+        </ResourceDictionary>
+
+    </Application.Resources>
+    
+</Application>

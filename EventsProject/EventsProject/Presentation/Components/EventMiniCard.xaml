@@ -1,0 +1,69 @@
+﻿<UserControl x:Class="EventsProject.Presentation.Components.EventMiniCard"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:EventsProject.Presentation.Components"
+             
+             mc:Ignorable="d">
+
+    <UserControl.Resources>
+
+        <Style x:Key="lblHeader" TargetType="Label">
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+        <Style x:Key="lblValue" TargetType="Label">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+        
+    </UserControl.Resources>
+    
+    <!-- MAIN LAYOUT -->
+    <Border BorderThickness="2" BorderBrush="{StaticResource clrTxt}" Background="{StaticResource clrMain}"
+            Width="480" Height="150">
+        <StackPanel DataContext="{Binding Event, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                    Orientation="Horizontal">
+
+            <!-- MAIN LAYOUT - IMG -->
+            <StackPanel>
+                <Border Background="{StaticResource clrMain}" Width="100" Height="150"
+                        BorderBrush="{StaticResource clrTxtSec}" BorderThickness="1">
+                    <Image Source="{Binding EventImg}" Stretch="Fill"/>
+                </Border>
+            </StackPanel>
+
+            <!-- MAIN LAYOUT - INFO -->
+            <StackPanel VerticalAlignment="Center">
+                <!-- MAIN LAYOUT - INFO - TITLE -->
+                <Label Content="{Binding Title}" Style="{StaticResource fntSbTitle}"/>
+            
+                <!-- MAIN LAYOUT - INFO - SPOT -->
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Spot Info:" Style="{StaticResource lblHeader}"/>
+                    <Label Content="{Binding EventPlace}" Style="{StaticResource lblValue}"/>
+                    <Label Content="-" Style="{StaticResource lblValue}"/>
+                    <Label Content="{Binding EventCity}" Style="{StaticResource lblValue}"/>
+                </StackPanel>
+            
+                <!-- MAIN LAYOUT - INFO - TIME -->
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Time Info:" Style="{StaticResource lblHeader}"/>
+                    <Label Content="{Binding InitialTime}" Style="{StaticResource lblValue}"/>
+                    <Label Content="-" Style="{StaticResource lblValue}"/>
+                    <Label Content="{Binding EndTime}" Style="{StaticResource lblValue}"/>
+                </StackPanel>
+
+                <!-- MAIN LAYOUT - INFO - STATE -->
+                <Label Content="{Binding EventState}" Style="{StaticResource fntSbTitle}" HorizontalContentAlignment="Center"/>
+
+            </StackPanel>
+
+        </StackPanel>    
+    </Border>
+    
+</UserControl>

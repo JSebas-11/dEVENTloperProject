@@ -1,0 +1,192 @@
+﻿<dialogs:CustomDialog x:Class="EventsProject.Presentation.UI.Forms.CreationEventForm"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:EventsProject.Presentation.UI.Forms"
+      xmlns:dialogs="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
+      xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+      xmlns:fa="http://schemas.fontawesome.io/icons/"
+      
+      mc:Ignorable="d"
+      Height="{StaticResource formHeight}" Width="{StaticResource formWidth}"
+      DialogContentWidth="Auto"
+      Background="{StaticResource linerGradBG}">
+
+    <!-- MAIN LAYOUT -->
+    <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="20">
+        <StackPanel HorizontalAlignment="Stretch">
+            
+            <!-- MAIN LAYOUT - HEADER -->
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <fa:FontAwesome Icon="AlignJustify" Margin="0 0 10 0" Style="{StaticResource fnaAnimatedFade}"/>
+                <Label Content="Creation/Request Event" Style="{StaticResource fntTitle}" Foreground="{StaticResource clrTxt}"/>
+                <Button x:Name="btnBack" Click="btnBack_Click" Margin="150 0 0 0">
+                    <StackPanel Orientation="Horizontal">
+                        <fa:FontAwesome Icon="Close" Style="{StaticResource fnaAnimatedBtn}"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        
+        <!-- MAIN LAYOUT - MAININPUTS -->
+            <Grid Margin="0 20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <!-- MAIN LAYOUT - MAININPUTS GENERAL -->
+                <GridSplitter Grid.Row="0" Height="3" Background="{StaticResource clrTxt}"/>
+                <Expander Grid.Row="1">
+                    <Expander.Header>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <fa:FontAwesome Icon="InfoCircle" Foreground="{StaticResource clrTxt}"/>
+                            <Label Content="General Info" Style="{StaticResource fntSbTitle}" Foreground="{StaticResource clrTxt}"/>
+                        </StackPanel>
+                    </Expander.Header>
+
+                    <!-- MAIN LAYOUT - TITLE -->
+                    <StackPanel HorizontalAlignment="Center" Margin="0 0 0 10">
+                        <Label Content="Event Title:" Style="{StaticResource fntSbTitle}" Foreground="{StaticResource clrTxtSec}" HorizontalAlignment="Center"/>
+                        <TextBox x:Name="txbTitle" Width="400" Style="{StaticResource styTextBox}" MaxLength="32"/>
+                        
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        
+                            <!-- MAIN LAYOUT - CAPACITY -->
+                            <StackPanel Margin="0 0 5 0">
+                                <Label Content="Event Capacity:" Style="{StaticResource fntSbTitle}" Foreground="{StaticResource clrTxtSec}"/>
+                                <mah:NumericUpDown x:Name="nudCapacity" Minimum="0" Maximum="1000000" Interval="10" FontSize="22"/>
+                            </StackPanel>
+                            <!-- MAIN LAYOUT - CATEGORY -->
+                            <StackPanel Margin="5 0 0 0">
+                                <Label Content="Event Category:" Style="{StaticResource fntSbTitle}" Foreground="{StaticResource clrTxtSec}"/>
+                                <ComboBox x:Name="cmbCategory" FontSize="22"/>
+                            </StackPanel>
+                        
+                        </StackPanel>
+
+                        <!-- MAIN LAYOUT - DESCRIPTION -->
+                        <Label Content="Event Description:" Style="{StaticResource fntSbTitle}" Foreground="{StaticResource clrTxtSec}" HorizontalAlignment="Center"/>
+                        <TextBox x:Name="txbDescription" TextWrapping="Wrap" AcceptsReturn="True" MaxLength="256"
+                                 Width="400" Height="150" Style="{StaticResource styTextBox}"/>
+                    </StackPanel>
+                </Expander>
+            
+                <!-- MAIN LAYOUT - MAININPUTS DATE-TIME -->
+                <GridSplitter Grid.Row="3" Height="3" Background="{StaticResource clrTxt}"/>
+                <Expander Grid.Row="4">
+                    <Expander.Header>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <fa:FontAwesome Icon="ClockOutline" Foreground="{StaticResource clrTxt}"/>
+                            <Label Content="Date-Time Info" Style="{StaticResource fntSbTitle}" Foreground="{StaticResource clrTxt}"/>
+                        </StackPanel>
+                    </Expander.Header>
+                    
+                    <!-- MAIN LAYOUT - DATE -->
+                    <StackPanel Margin="0 0 0 10" HorizontalAlignment="Center">
+
+                        <!-- MAIN LAYOUT - INTIAL TIME -->
+                        <StackPanel Orientation="Horizontal">
+                            <StackPanel Margin="0 0 5 0">
+                                <Label Content="Intial Time:" Style="{StaticResource fntSbTitle}" Foreground="{StaticResource clrTxtSec}"/>
+                                <mah:DateTimePicker x:Name="dtpInitalHour" Cursor="Hand" Culture="en-MT"
+                                                    Style="{StaticResource styTextBox}"/>
+                            </StackPanel>
+                        <!-- MAIN LAYOUT - END TIME -->
+                            <StackPanel Margin="5 0 0 0">
+                                <Label Content="End Time:" Style="{StaticResource fntSbTitle}" Foreground="{StaticResource clrTxtSec}"/>
+                                <mah:DateTimePicker x:Name="dtpEndHour" Cursor="Hand" Culture="en-MT"
+                                                    Style="{StaticResource styTextBox}"/>
+                            </StackPanel>
+                        </StackPanel>
+
+                    </StackPanel>
+                </Expander>
+            
+                <!-- MAIN LAYOUT - MAININPUTS SPOT -->
+                <GridSplitter Grid.Row="6" Height="3" Background="{StaticResource clrTxt}"/>
+                <Expander Grid.Row="7">
+                    <Expander.Header>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <fa:FontAwesome Icon="LocationArrow" Foreground="{StaticResource clrTxt}"/>
+                            <Label Content="Spot Info" Style="{StaticResource fntSbTitle}" Foreground="{StaticResource clrTxt}"/>
+                        </StackPanel>
+                    </Expander.Header>
+            
+                    <!-- MAIN LAYOUT - CITY -->
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 0 10">
+                        <StackPanel Margin="0 0 5 0">
+                            <Label Content="Event City:" Style="{StaticResource fntSbTitle}" Foreground="{StaticResource clrTxtSec}"/>
+                            <TextBox x:Name="txbCity" Style="{StaticResource styTextBox}" MaxLength="32" MaxWidth="250"/>
+                        </StackPanel>
+                    <!-- MAIN LAYOUT - PLACE -->
+                        <StackPanel Margin="5 0 0 0">
+                            <Label Content="Event Place:" Style="{StaticResource fntSbTitle}" Foreground="{StaticResource clrTxtSec}"/>
+                            <TextBox x:Name="txbPlace" Style="{StaticResource styTextBox}" MaxLength="32" MaxWidth="250"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Expander>
+            
+                <!-- MAIN LAYOUT - MAININPUTS OTHER -->
+                <GridSplitter Grid.Row="9" Height="3" Background="{StaticResource clrTxt}"/>
+                <Expander Grid.Row="10" >
+                    <Expander.Header>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <fa:FontAwesome Icon="Paragraph" Foreground="{StaticResource clrTxt}"/>
+                            <Label Content="Other Info" Style="{StaticResource fntSbTitle}" Foreground="{StaticResource clrTxt}"/>
+                        </StackPanel>
+                    </Expander.Header>
+            
+                    <StackPanel Grid.Row="11" HorizontalAlignment="Center" Orientation="Horizontal" Margin="0 0 0 10">
+
+                        <!-- MAIN LAYOUT - ARTIST -->
+                        <StackPanel Margin="0 0 5 0">
+                            <Label Content="Event Artist/Artists:" Style="{StaticResource fntSbTitle}" Foreground="{StaticResource clrTxtSec}" HorizontalAlignment="Center"/>
+                            <TextBox x:Name="txbArtist" TextWrapping="Wrap" AcceptsReturn="True" MaxLength="128"
+                                 Width="280" Height="150" Style="{StaticResource styTextBox}"/>
+                        </StackPanel>
+                        <!-- MAIN LAYOUT - IMAGE -->
+                        <StackPanel Margin="5 0 0 0" VerticalAlignment="Center">
+                            <Label Content="Event Picture (optional):" Style="{StaticResource fntSbTitle}" Foreground="{StaticResource clrTxtSec}" HorizontalAlignment="Center"/>
+                            <Button x:Name="btnImgDialog" Click="btnImgDialog_Click">
+                                <StackPanel Orientation="Horizontal">
+                                    <fa:FontAwesome Icon="Upload" Style="{StaticResource fnaAnimatedBtn}"/>
+                                    <TextBlock Text="Load Image" Margin="8 0 0 0"/>
+                                </StackPanel>
+                            </Button>
+                            <Label x:Name="lblFormats" Style="{StaticResource fntText}" Foreground="{StaticResource clrTxtSec}" HorizontalAlignment="Center"/>
+                        </StackPanel>
+                        
+                    </StackPanel>
+                    
+                </Expander>
+            
+                <GridSplitter Grid.Row="12" Height="3" Background="{StaticResource clrTxt}"/>
+            
+            </Grid>
+        
+            <!-- MAIN LAYOUT - FOOTER -->
+            <Button x:Name="btnConfirm" Click="btnConfirm_Click">
+                <StackPanel Orientation="Horizontal">
+                    <fa:FontAwesome Icon="CheckCircle" Style="{StaticResource fnaAnimatedBtn}"/>
+                    <TextBlock Text="Confirm" Margin="8 0 0 0"/>
+                </StackPanel>
+            </Button>
+
+        </StackPanel>
+     </ScrollViewer>
+    
+</dialogs:CustomDialog>

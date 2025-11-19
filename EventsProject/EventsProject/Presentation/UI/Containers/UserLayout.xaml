@@ -1,0 +1,94 @@
+﻿<Page x:Class="EventsProject.Presentation.UI.Containers.UserLayout"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:EventsProject.Presentation.UI.Containers"
+      xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+      xmlns:fa="http://schemas.fontawesome.io/icons/"
+      
+      mc:Ignorable="d" 
+      Title="User Container">
+
+    <!-- USER CONTAINER - MAIN LAYOUT -->
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="pack://application:,,,/Resources/bg3.jpg" Stretch="Fill"/>
+        </Grid.Background>
+
+        <!-- USER CONTAINER - CONTENT FRAME -->
+        <Frame x:Name="frUser" Panel.ZIndex="0" NavigationUIVisibility="Hidden" Margin="60 0 0 0"/>
+
+        <!-- USER CONTAINER - NAVEGATION MENU -->
+        <mah:HamburgerMenu x:Name="hmUser" ItemInvoked="hmUser_ItemInvoked">
+
+            <!-- NAVEGATION MENU - HEADER -->
+            <mah:HamburgerMenu.HamburgerMenuHeaderTemplate>
+                <DataTemplate>
+                    <TextBlock Text="User Pages" Foreground="{StaticResource clrTxtSec}" 
+                           FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </DataTemplate>
+            </mah:HamburgerMenu.HamburgerMenuHeaderTemplate>
+
+            <!-- NAVEGATION MENU - ITEMS -->
+            <mah:HamburgerMenu.ItemsSource>
+                <mah:HamburgerMenuItemCollection>
+                    <mah:HamburgerMenuIconItem Label="HOME" Tag="{x:Static local:UserNavigation.Home}">
+                        <mah:HamburgerMenuIconItem.Icon>
+                            <fa:ImageAwesome Icon="Home"/>
+                        </mah:HamburgerMenuIconItem.Icon>
+                    </mah:HamburgerMenuIconItem>
+                    <mah:HamburgerMenuIconItem Label="EVENTS" Tag="{x:Static local:UserNavigation.Events}">
+                        <mah:HamburgerMenuIconItem.Icon>
+                            <fa:ImageAwesome Icon="Calendar"/>
+                        </mah:HamburgerMenuIconItem.Icon>
+                    </mah:HamburgerMenuIconItem>
+                    <mah:HamburgerMenuIconItem Label="HISTORY" Tag="{x:Static local:UserNavigation.History}">
+                        <mah:HamburgerMenuIconItem.Icon>
+                            <fa:ImageAwesome Icon="History"/>
+                        </mah:HamburgerMenuIconItem.Icon>
+                    </mah:HamburgerMenuIconItem>
+                    <mah:HamburgerMenuIconItem Label="EDIT INFO" Tag="{x:Static local:UserNavigation.Edit}">
+                        <mah:HamburgerMenuIconItem.Icon>
+                            <fa:ImageAwesome Icon="Pencil"/>
+                        </mah:HamburgerMenuIconItem.Icon>
+                    </mah:HamburgerMenuIconItem>
+                </mah:HamburgerMenuItemCollection>
+            </mah:HamburgerMenu.ItemsSource>
+
+            <!-- NAVEGATION MENU - ITEMS TEMPLATE -->
+            <mah:HamburgerMenu.ItemTemplate>
+                <DataTemplate DataType="{x:Type mah:HamburgerMenuIconItem}">
+                    <StackPanel Orientation="Horizontal" Margin="5 20">
+                        <ContentControl Content="{Binding Icon}" Width="40" Height="40" Margin="0,0,8,0"/>
+                        <TextBlock Text="{Binding Label}" VerticalAlignment="Center" FontSize="20" Foreground="{StaticResource clrTxtSec}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </mah:HamburgerMenu.ItemTemplate>
+
+            <!-- NAVEGATION MENU - OPTIONS -->
+            <mah:HamburgerMenu.OptionsItemsSource>
+                <mah:HamburgerMenuItemCollection>
+                    <mah:HamburgerMenuIconItem Label="LOG OUT" Tag="{x:Static local:UserNavigation.Exit}">
+                        <mah:HamburgerMenuIconItem.Icon>
+                            <fa:ImageAwesome Icon="ArrowCircleOutlineRight"/>
+                        </mah:HamburgerMenuIconItem.Icon>
+                    </mah:HamburgerMenuIconItem>
+                </mah:HamburgerMenuItemCollection>
+            </mah:HamburgerMenu.OptionsItemsSource>
+
+            <!-- NAVEGATION MENU - OPTIONS TEMPLATE -->
+            <mah:HamburgerMenu.OptionsItemTemplate>
+                <DataTemplate DataType="{x:Type mah:HamburgerMenuIconItem}">
+                    <StackPanel Orientation="Horizontal" Margin="5 20">
+                        <ContentControl Content="{Binding Icon}" Width="40" Height="40" Margin="0,0,8,0"/>
+                        <TextBlock Text="{Binding Label}" VerticalAlignment="Center" FontSize="20" Foreground="{StaticResource clrTxtSec}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </mah:HamburgerMenu.OptionsItemTemplate>
+
+        </mah:HamburgerMenu>
+
+    </Grid>
+
+</Page>

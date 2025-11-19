@@ -1,0 +1,175 @@
+﻿<Page x:Class="EventsProject.Presentation.UI.Pages.UserHome"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:EventsProject.Presentation.UI.Pages"
+      xmlns:fa="http://schemas.fontawesome.io/icons/"
+      xmlns:compts="clr-namespace:EventsProject.Presentation.Components"
+      
+      mc:Ignorable="d" 
+      Title="UserHome">
+
+    <!-- RESOURCES -->
+    <Page.Resources>
+
+        <Style TargetType="ScrollViewer">
+            <Setter Property="Background" Value="{StaticResource clrHover}"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="CanContentScroll" Value="False"/>
+            <Setter Property="HorizontalScrollBarVisibility" Value="Disabled"/>
+            <Setter Property="VerticalScrollBarVisibility" Value="Visible"/>
+        </Style>
+
+    </Page.Resources>
+
+    <!--MAIN LAYOUT-->
+    <Grid x:Name="gdContent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="5*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width=".25*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width=".8*"/>
+        </Grid.ColumnDefinitions>
+        
+        <!--MAIN LAYOUT - HEADER -->
+        <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+            <Border Background="{StaticResource clrMain}" Width="55" Height="55" Margin="0 5 0 0"
+                    BorderBrush="{StaticResource clrTxtSec}" BorderThickness="2" CornerRadius="20">
+                <Image Source="{Binding UserImg}" Stretch="Fill"/>
+            </Border>
+            <Label x:Name="lblUserName" Style="{StaticResource fntTitle}" Foreground="{StaticResource clrTxt}"/>
+        </StackPanel>
+        <Button Grid.Row="0" Grid.Column="2" x:Name="btnRefresh" Click="btnRefresh_Click"  Margin="100 8">
+            <StackPanel Orientation="Horizontal">
+                <fa:FontAwesome Icon="PieChart" Style="{StaticResource fnaAnimatedBtn}"/>
+                <TextBlock Text="Refresh Data" Margin="8 0 0 0"/>
+            </StackPanel>
+        </Button>
+        <fa:FontAwesome Grid.Row="0" Grid.Column="3" Icon="Briefcase" Style="{StaticResource fnaAnimatedFade}"/>
+
+        <!--MAIN LAYOUT - METRICS -->
+        <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Label Content="User Info" Style="{StaticResource fntSbTitle}" Foreground="{StaticResource clrTxtSec}" HorizontalAlignment="Center"/>
+
+            <!--MAIN LAYOUT - ENROLLED EVENTS -->
+            <Border Style="{StaticResource brdCard}">
+                <StackPanel Orientation="Horizontal">
+                    <fa:FontAwesome Icon="Hourglass" Style="{StaticResource fnaBrdCard}"/>
+                    <Label Content="Enrolled Events: " Style="{StaticResource lblBrdCard}"/>
+                    <Label x:Name="lblEnrolledEvents" Style="{StaticResource lblBrdCard}"/>
+                </StackPanel>
+            </Border>
+            <!--MAIN LAYOUT - CREATED EVENTS -->
+            <Border Style="{StaticResource brdCard}">
+                <StackPanel Orientation="Horizontal">
+                    <fa:FontAwesome Icon="ThumbsUp" Style="{StaticResource fnaBrdCard}"/>
+                    <Label Content="Created Events: " Style="{StaticResource lblBrdCard}"/>
+                    <Label x:Name="lblCreatedEvents" Style="{StaticResource lblBrdCard}"/>
+                </StackPanel>
+            </Border>
+            <!--MAIN LAYOUT - PENDING EVENTS -->
+            <Border Style="{StaticResource brdCard}">
+                <StackPanel Orientation="Horizontal">
+                    <fa:FontAwesome Icon="ClockOutline" Style="{StaticResource fnaBrdCard}"/>
+                    <Label Content="Pending Events: " Style="{StaticResource lblBrdCard}"/>
+                    <Label x:Name="lblPendingEvents" Style="{StaticResource lblBrdCard}"/>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+
+        <!-- MAIN LAYOUT - NOTIFICATIONS -->
+        <Border Grid.Row="1" Grid.Column="2" Background="{StaticResource clrHover}" Margin="10" Padding="10"
+                BorderBrush="{StaticResource clrTxt}" BorderThickness="5" CornerRadius="20">
+            <StackPanel>
+                <!-- MAIN LAYOUT - NOTIFICATIONS - MESSAGE -->
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 0 10">
+                    <fa:FontAwesome Icon="Bell" Style="{StaticResource fnaAnimatedFade}" Foreground="{StaticResource clrTxt}"/>
+                    <Label Content="Unread Notifications: " Style="{StaticResource fntSbTitle}"/>
+                    <Border Background="DarkRed" BorderBrush="{StaticResource clrTxt}" BorderThickness="2" CornerRadius="20">
+                        <Label x:Name="lblNotification" Style="{StaticResource fntSbTitle}"/>
+                    </Border>
+                </StackPanel>
+                    
+                <!-- MAIN LAYOUT - NOTIFICATIONS - DATA -->
+                <ScrollViewer Height="200">
+                    <ItemsControl x:Name="icNotification">
+                        <!-- PANEL - CARD -->
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Vertical" IsItemsHost="True"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                        <!-- CARD - DESIGN -->
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border Margin="1" Background="{StaticResource clrMain}" Style="{StaticResource brdCard}" Width="450" BorderThickness="2">
+                                    <StackPanel>
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                            <Button Content="✓✓" Height="35" Width="40" FontSize="12" ToolTip="Mark as read" 
+                                                    Click="btnMarkAsRead_Click" Tag="{Binding}"/>
+                                            <Label Content="{Binding CreatedAt}" FontStyle="Italic" FontSize="17" Style="{StaticResource lblBrdCard}"/>
+                                        </StackPanel>
+                                        <Label Margin="0 5" Style="{StaticResource lblBrdCard}" FontSize="13">
+                                            <TextBlock Text="{Binding NotMessage}" TextWrapping="Wrap"/>
+                                        </Label>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+
+            </StackPanel>
+        </Border>
+
+        <!--MAIN LAYOUT - LAST EVENTS -->
+        <StackPanel Grid.Row="2" Grid.Column="1">
+            <Label Content="Last 5 events" HorizontalAlignment="Center" Style="{StaticResource fntSbTitle}"/>
+
+            <ScrollViewer Height="250">
+                <ItemsControl x:Name="icLastEvents">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal" IsItemsHost="True" HorizontalAlignment="Center"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <compts:EventMiniCard Event="{Binding}"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </StackPanel>
+        
+        <!--MAIN LAYOUT - NEXT EVENTS -->
+        <StackPanel Grid.Row="2" Grid.Column="2">
+            <Label Content="Next 5 events" HorizontalAlignment="Center" Style="{StaticResource fntSbTitle}"/>
+
+            <ScrollViewer Height="250">
+                <ItemsControl x:Name="icNextEvents">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal" IsItemsHost="True" HorizontalAlignment="Center"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <compts:EventMiniCard Event="{Binding}"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </StackPanel>
+
+    </Grid>
+</Page>

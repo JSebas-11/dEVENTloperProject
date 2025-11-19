@@ -1,0 +1,95 @@
+﻿<Page x:Class="EventsProject.Presentation.UI.Pages.UserHistory"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:EventsProject.Presentation.UI.Pages"
+      xmlns:fa="http://schemas.fontawesome.io/icons/" 
+      xmlns:compts="clr-namespace:EventsProject.Presentation.Components"
+      
+      mc:Ignorable="d" 
+      Title="UserHistory">
+
+    <!-- RESOURCES -->
+    <Page.Resources>
+
+        <Style TargetType="ScrollViewer">
+            <Setter Property="Background" Value="{StaticResource clrHover}"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="Height" Value="475"/>
+            <Setter Property="CanContentScroll" Value="False"/>
+            <Setter Property="HorizontalScrollBarVisibility" Value="Disabled"/>
+            <Setter Property="VerticalScrollBarVisibility" Value="Visible"/>
+        </Style>
+        
+    </Page.Resources>
+    
+    <!--MAIN LAYOUT -->
+    <Grid x:Name="gdMainContainer">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height=".5*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height=".1*"/>
+        </Grid.RowDefinitions>
+
+        <!--MAIN LAYOUT - HEADER -->
+        <StackPanel Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Orientation="Horizontal" VerticalAlignment="Center">
+            <Border Background="{StaticResource clrMain}" Width="100" Height="100"
+                    BorderBrush="{StaticResource clrTxtSec}" BorderThickness="2" CornerRadius="50">
+                <Image Source="{Binding UserImg}" Stretch="Fill"/>
+            </Border>
+            <Label x:Name="lblUserName" Style="{StaticResource fntTitle}" Foreground="{StaticResource clrTxt}" VerticalAlignment="Center"/>
+        </StackPanel>
+        <fa:FontAwesome Grid.Row="0" Grid.Column="3" Icon="Database" Style="{StaticResource fnaAnimatedFade}"/>
+        
+        <!--MAIN LAYOUT - DATAEVENTS - ENROLL -->
+        <StackPanel Grid.Row="1" Grid.Column="1">
+            <Label Content="Created Events" HorizontalAlignment="Center" Style="{StaticResource fntTitle}"/>
+
+            <ScrollViewer>
+                <ItemsControl x:Name="icCreatedEvents">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal" IsItemsHost="True" HorizontalAlignment="Center"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <compts:EventMiniCard Event="{Binding}"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </StackPanel>
+
+        <!--MAIN LAYOUT - DATAEVENTS - CREATED -->
+        <StackPanel Grid.Row="1" Grid.Column="2">
+            <Label Content="Enrolled Events" HorizontalAlignment="Center" Style="{StaticResource fntTitle}"/>
+
+            <ScrollViewer>
+                <ItemsControl x:Name="icEnrolledEvents">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal" IsItemsHost="True" HorizontalAlignment="Center"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <compts:EventMiniCard Event="{Binding}"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </StackPanel>
+
+    </Grid>
+
+</Page>

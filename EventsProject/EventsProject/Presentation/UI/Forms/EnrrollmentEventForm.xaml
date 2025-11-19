@@ -1,0 +1,145 @@
+﻿<dialogs:CustomDialog x:Class="EventsProject.Presentation.UI.Forms.EnrrollmentEventForm"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:EventsProject.Presentation.UI.Forms"
+      xmlns:dialogs="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
+      xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+      xmlns:fa="http://schemas.fontawesome.io/icons/"
+      
+      mc:Ignorable="d"
+      Height="{StaticResource formHeight}" Width="{StaticResource formWidth}"
+      DialogContentWidth="Auto"
+      Background="{StaticResource linerGradBG}">
+
+    <!-- MAIN LAYOUT -->
+    <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Disabled" 
+                    CanContentScroll="False" Padding="8">
+        <StackPanel x:Name="spEventContent">
+
+            <!-- MAIN LAYOUT - HEADER -->
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <fa:FontAwesome Icon="Book" Margin="0 0 10 0" Style="{StaticResource fnaAnimatedFade}"/>
+                <Label Content="Event Enrrollment" Style="{StaticResource fntTitle}" Foreground="{StaticResource clrTxt}"/>
+                <Button x:Name="btnBack" Click="btnBack_Click"  Margin="300 0 0 0">
+                    <StackPanel Orientation="Horizontal">
+                        <fa:FontAwesome Icon="Close" Style="{StaticResource fnaAnimatedBtn}"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+
+            <!-- MAIN LAYOUT - EVENT - SECT1 -->
+            <StackPanel Orientation="Horizontal" Margin="0 5">
+                <!-- MAIN LAYOUT - EVENT - IMG -->
+                <Grid>
+                    <Border Background="{StaticResource clrMain}" Width="280" Height="350"
+                            BorderBrush="{StaticResource clrTxtSec}" BorderThickness="1">
+                        <Image Source="{Binding EventImg}" Stretch="Fill"/>
+                    </Border>
+                    <Border x:Name="bdEventState" Height="40" Margin="10" Opacity="0.75" CornerRadius="4" 
+                            HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                        <Label Content="{Binding EventState}" Style="{StaticResource fntSbTitle}" Foreground="{StaticResource clrTxt}"
+                                HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                    </Border>
+                </Grid>
+
+                <StackPanel Margin="5 0 0 0" Width="350">
+                    <!-- MAIN LAYOUT - EVENT - CATEGORY -->
+                    <Label Content="{Binding Category}" Style="{StaticResource fntText}"/>
+                    <!-- MAIN LAYOUT - EVENT - TITLE -->
+                    <TextBlock Text="{Binding Title}" TextWrapping="Wrap" Style="{StaticResource fntTitleTxb}"/>
+                    <!-- MAIN LAYOUT - EVENT - DESCRIPTION -->
+                    <Border BorderBrush="{StaticResource clrTxtSec}" BorderThickness="1"
+                            CornerRadius="4" Margin="5">
+                        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled"
+                                        Height="120" Padding="4">
+                            <StackPanel>
+                                <Label Content="Description:" Style="{StaticResource fntText}"/>
+                                <TextBlock Text="{Binding EventDescription}" TextWrapping="Wrap" 
+                                            Style="{StaticResource fntTextTxb}" Foreground="{StaticResource clrTxtSec}"/>
+                            </StackPanel>
+                        </ScrollViewer>
+                    </Border>
+                    <!-- MAIN LAYOUT - EVENT - ARTIST -->
+                    <Border BorderBrush="{StaticResource clrTxtSec}" BorderThickness="1" CornerRadius="4" Margin="5 0 5 5">
+                        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" 
+                                        Height="120" Padding="4">
+                            <StackPanel>
+                                <Label Content="Artist/s:" Style="{StaticResource fntText}"/>
+                                <TextBlock Text="{Binding Artist}" TextWrapping="Wrap" Style="{StaticResource fntTextTxb}" 
+                                            Foreground="{StaticResource clrTxtSec}"/>
+                            </StackPanel>
+                        </ScrollViewer>
+                    </Border>
+                </StackPanel>
+            </StackPanel>
+
+            <!-- MAIN LAYOUT - EVENT - SECT2 -->
+            <StackPanel HorizontalAlignment="Center">
+                <StackPanel Orientation="Horizontal">
+
+                    <!-- MAIN LAYOUT - EVENT - TIME -->
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <fa:FontAwesome Icon="ClockOutline"/>
+                            <Label Content="TIME INFO:" Style="{StaticResource fntSbTitle}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <StackPanel>
+                                <Label Content="INITIAL TIME" Style="{StaticResource fntSbTitle}" FontSize="15"/>
+                                <Label Content="{Binding InitialTime}" FontStyle="Italic"/>
+                            </StackPanel>
+                            <StackPanel>
+                                <Label Content="END TIME" Style="{StaticResource fntSbTitle}" FontSize="15"/>
+                                <Label Content="{Binding EndTime}" FontStyle="Italic"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <!-- MAIN LAYOUT - EVENT - PLACE -->
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <fa:FontAwesome Icon="Globe"/>
+                            <Label Content="SPOT INFO:" Style="{StaticResource fntSbTitle}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <StackPanel>
+                                <Label Content="PLACE" Style="{StaticResource fntSbTitle}" FontSize="15"/>
+                                <Label Content="{Binding EventPlace}" FontStyle="Italic"/>
+                            </StackPanel>
+                            <StackPanel>
+                                <Label Content="CITY" Style="{StaticResource fntSbTitle}" FontSize="15"/>
+                                <Label Content="{Binding EventCity}" FontStyle="Italic"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+
+                </StackPanel>
+
+                <!-- MAIN LAYOUT - EVENT - ENRROLL -->
+                <StackPanel HorizontalAlignment="Center">
+                    <!-- MAIN LAYOUT - EVENT - TICKETS -->
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="TICKETS COUNTER: " Style="{StaticResource fntSbTitle}" Foreground="{StaticResource clrTxtSec}"/>
+                        <Label x:Name="lblBougthAmount" Style="{StaticResource fntSbTitle}"/>
+                        <Label Content="/" Style="{StaticResource fntSbTitle}"/>
+                        <Label Content="{Binding Capacity}" Style="{StaticResource fntSbTitle}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0 10" HorizontalAlignment="Center">
+                        <mah:NumericUpDown x:Name="nudCapacity" Value="1" Minimum="1" Maximum="{Binding Capacity}" Interval="1" FontSize="22"/>
+                        <Button x:Name="btnEnrroll" Click="btnEnrroll_Click" Margin="5 0">
+                            <StackPanel Orientation="Horizontal">
+                                <fa:FontAwesome Icon="Clipboard" Style="{StaticResource fnaAnimatedBtn}"/>
+                                <TextBlock Text="Buy Tickets" Margin="8 0 0 0"/>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+
+            </StackPanel>
+
+        </StackPanel>
+    </ScrollViewer>
+
+</dialogs:CustomDialog>
