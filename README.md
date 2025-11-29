@@ -98,3 +98,21 @@ Se usa para crear un usuario administrador si no existe en la base de datos, (pu
 
 ## 🖼️ Previsualizaciones
 
+---
+# Common Pages
+![Login](screenshots/loginPage.png)
+![VerificationCode](screenshots/verCodePage.png)
+
+---
+# Admin Pages
+![AdminHome](screenshots/adminHome.png)
+![EventsManagment](screenshots/adminManagment.png)
+![AdminRequest](screenshots/adminRequest.png)
+
+---
+# User Pages
+![UserHome](screenshots/userHome.png)
+![Events](screenshots/eventsPage.png)
+![EventSelection](screenshots/eventSelection.png)
+![UserHistory](screenshots/userHistory.png)
+![UserConfiguration](screenshots/userConfig.png)
